@@ -11,9 +11,9 @@ const Footer = () => (
           </div>
           <p className="text-sm text-muted-foreground mb-4">AI-powered invisible companion for better digital experiences.</p>
           <div className="flex gap-3">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Twitter size={16} /></a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Github size={16} /></a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Linkedin size={16} /></a>
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-xs">𝕏</a>
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><ExternalLink size={14} /></a>
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><ExternalLink size={14} /></a>
           </div>
         </div>
         {[
