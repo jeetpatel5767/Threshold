@@ -1,4 +1,4 @@
-import { X, Github as GithubIcon, Linkedin as LinkedinIcon } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const Footer = () => (
   <footer className="border-t border-border/30 bg-secondary/20">
