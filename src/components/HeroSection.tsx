@@ -1,54 +1,184 @@
-import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
-import heroObject from "@/assets/hero-object.png";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import heroBg from "@/assets/Hero-BG.png";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const HeroSection = () => (
-  <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-    <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} />
-    <div className="absolute inset-0 bg-background/40" />
-    <div className="relative z-10 flex flex-col items-center text-center px-6 pt-20">
-      <motion.img
-        src={heroObject}
-        alt="3D Object"
-        className="w-48 h-48 md:w-64 md:h-64 mb-8 object-contain"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      />
-      <motion.h1
-        className="font-heading font-bold text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight text-foreground"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-      >
-        Step <span className="italic font-normal">into</span> better
-        <br />
-        digital experiences
-      </motion.h1>
-      <motion.p
-        className="mt-6 text-muted-foreground max-w-xl text-sm md:text-base"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        AI-powered companion that amplifies your focus, accelerates your workflow, and delivers invisible power to every task.
-      </motion.p>
-      <motion.div
-        className="mt-8 flex gap-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-      >
-        <a href="#pricing" className="bg-foreground text-background px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-          Get Started
-        </a>
-        <a href="#about" className="border border-border px-6 py-3 rounded-full text-sm font-medium text-foreground hover:bg-secondary transition-colors">
-          Learn More
-        </a>
-      </motion.div>
-    </div>
-    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-  </section>
-);
+import "@fontsource/pacifico";
 
-export default HeroSection;
+const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const frameSources = useMemo(() => {
+    const frameMap = import.meta.glob("@/assets/Photos/*.jpg", {
+      eager: true,
+      import: "default",
+    }) as Record<string, string>;
+
+    return Object.entries(frameMap)
+      .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+      .map(([, src]) => src);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  const frameIndex = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, Math.max(frameSources.length - 1, 0)]
+  );
+
+  const textProgress = useTransform(scrollYProgress, [0, 0.05, 1], [0, 0, 1]);
+
+  const textParallaxY = useTransform(textProgress, [0, 0.5, 1], [-250, -750, -1500]);
+  const textParallaxScale = useTransform(textProgress, [0, 0.5, 1], [1, 1.8, 3]);
+  const textParallaxOpacity = useTransform(
+    textProgress,
+    [0, 0.35, 0.5, 1],
+    [1, 0.6, 0, 0]
+  );
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    setHasScrolled(value > 0.001);
+  });
+
+  useEffect(() => {
+    if (frameSources.length === 0) return;
+
+    const imgs: HTMLImageElement[] = [];
+    let loaded = 0;
+
+    for (const src of frameSources) {
+      const img = new Image();
+      img.src = src;
+
+      const onComplete = () => {
+        loaded++;
+        if (loaded === frameSources.length) {
+          setImages(imgs);
+          setIsLoaded(true);
+        }
+      };
+
+      img.onload = onComplete;
+      img.onerror = onComplete;
+
+      imgs.push(img);
+    }
+  }, [frameSources]);
+
+  useEffect(() => {
+    const render = () => {
+      const canvas = canvasRef.current;
+      const container = containerRef.current;
+
+      if (!canvas || !container || !hasScrolled || !isLoaded) return;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const rect = container.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      const width = rect.width;
+      const height = rect.height;
+
+      // ✅ FORCE EXACT MATCH
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+
+      const index = Math.floor(frameIndex.get());
+      const img = images[index];
+
+      if (!img) return;
+
+      // 🔥 PERFECT OBJECT-COVER MATCH
+      const scale = Math.max(width / img.width, height / img.height);
+      const drawWidth = img.width * scale;
+      const drawHeight = img.height * scale;
+
+      const offsetX = (width - drawWidth) / 2;
+      const offsetY = (height - drawHeight) / 2;
+
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    };
+
+    const unsubscribe = frameIndex.on("change", () => {
+      requestAnimationFrame(render);
+    });
+
+    window.addEventListener("resize", render);
+    if (hasScrolled && isLoaded) render();
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener("resize", render);
+    };
+  }, [frameIndex, hasScrolled, isLoaded, images]);
+
+  return (
+    <section ref={sectionRef} className="relative h-[500vh] w-full bg-black">
+      
+      <div
+        ref={containerRef}
+        className="sticky top-0 h-[120vh] w-full flex items-center justify-center overflow-hidden perspective-[1200px]"
+      >
+
+        {/* 🔥 HERO IMAGE */}
+        <motion.img
+          src={heroBg}
+          alt=""
+          className="absolute inset-0 z-0 w-full h-full object-cover"
+          initial={{ scale: 1.2, opacity: 0 }}
+          animate={{ scale: 1.0, opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        />
+
+        {/* 🔥 CANVAS (NOW PERFECTLY MATCHED) */}
+        <canvas
+          ref={canvasRef}
+          className={`absolute inset-0 z-[1] ${
+            hasScrolled && isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent to-black/70" />
+        <div className="hero-grain absolute inset-0 z-[3]" />
+
+        {/* TEXT */}
+        <motion.div
+          style={{
+            y: textParallaxY,
+            scale: textParallaxScale,
+            opacity: textParallaxOpacity,
+          }}
+          className="relative z-10 flex flex-col items-center text-center px-6"
+        >
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-[#303030] font-regular tracking-[-0.02em] leading-tight">
+            Step <span style={{ fontFamily: "Pacifico"}}>into</span> better
+            <br />
+            digital experiences
+          </h1>
+
+          <p className="mt-4 max-w-[400px] text-base md:text-lg text-[#424141] leading-[0.7] md:leading-[120%]">
+            An AI companion that whispers clarity, conjures ideas, and guides your every move.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection; 
