@@ -20,10 +20,10 @@ const HorizontalBrandSection = () => {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex items-center whitespace-nowrap">
           <div className="flex items-center gap-[3vw]">
-            <div className="rounded-full bg-th-fg shrink-0 shadow-[0_4px_24px_rgba(0,0,0,0.06)]" style={{ width: "20vw", height: "20vw" }} />
+            <div className="rounded-full bg-col-primary shrink-0 shadow-[0_4px_24px_rgba(0,0,0,0.06)]" style={{ width: "20vw", height: "20vw" }} />
             <span className="inline-flex items-baseline gap-0 leading-none" style={{ fontSize: "27vw" }}>
-              <span className="font-heading font-extrabold text-th-fg">Thres</span>
-              <span className="font-pacifico text-th-muted">hold</span>
+              <span className="font-heading font-extrabold text-col-primary">Thres</span>
+              <span className="font-pacifico text-col-tertiary">hold</span>
             </span>
           </div>
         </motion.div>

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -28,10 +27,10 @@
     --ring: 170 60% 45%;
     --radius: 0.75rem;
 
-    /* Threshold palette */
-    --th-shadow:     hsl(220 12% 60% / 0.12);
-    --th-shadow-lg:  hsl(220 12% 50% / 0.18);
-    --th-glow:       hsl(210 20% 98% / 0.8);
+    /* Shadow / glow tokens */
+    --shadow:    hsl(220 12% 60% / 0.12);
+    --shadow-lg: hsl(220 12% 50% / 0.18);
+    --glow:      hsl(210 20% 98% / 0.8);
   }
 }
 
@@ -41,7 +40,7 @@
   h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; }
 }
 
-/* Threshold page body override */
+/* Page-level body override for the landing page */
 body.threshold-body {
   background: hsl(210 8% 91%);
   background-image:
@@ -54,7 +53,6 @@ body.threshold-body {
 
 @layer utilities {
   .font-into { font-family: "Pacifico", cursive; }
-  .font-playwrite { font-family: "Playwrite US Trad", cursive; }
   .hero-grain {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch' /%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='1' /%3E%3C/svg%3E");
     background-size: 220px 220px;

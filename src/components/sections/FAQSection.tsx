@@ -20,17 +20,17 @@ const FAQSection = () => {
       style={{ background: "radial-gradient(ellipse 70% 60% at 30% 50%, hsl(210 10% 88%) 0%, hsl(215 8% 91%) 100%)" }}
     >
       <div className="max-w-[1280px] mx-auto px-12">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-th-light mb-5">
-          <span className="inline-block w-5 h-px bg-th-warm flex-shrink-0" />Support
+        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+          <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Support
         </p>
 
         <div className="grid gap-16 items-start" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
           {/* Left — heading + accordion */}
           <div>
-            <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-th-fg max-w-[480px] mb-[14px]">
-              Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-th-muted">answered</em> plainly
+            <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[480px] mb-[14px]">
+              Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">answered</em> plainly
             </h2>
-            <p className="text-[0.88rem] text-th-muted leading-[1.7] font-normal mb-[52px] max-w-[400px]">
+            <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal mb-[52px] max-w-[400px]">
               No fluff, no vague promises — just straight answers to what teams ask us most before they commit.
             </p>
 
@@ -38,17 +38,17 @@ const FAQSection = () => {
               {faqs.map((f, i) => (
                 <div
                   key={i}
-                  className="border-b border-th-border/70 last:border-none"
+                  className="border-b border-col-line/70 last:border-none"
                 >
                   <button
                     onClick={() => setOpen(open === i ? -1 : i)}
                     className="w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer bg-transparent border-none"
                   >
-                    <span className={`text-[0.9rem] font-normal leading-[1.4] transition-colors duration-300 ${open === i ? "text-th-fg" : "text-th-muted"}`}>
+                    <span className={`text-[0.9rem] font-normal leading-[1.4] transition-colors duration-300 ${open === i ? "text-col-primary" : "text-col-tertiary"}`}>
                       {f.q}
                     </span>
-                    <span className={`flex-shrink-0 w-[22px] h-[22px] rounded-full border border-th-border/70 flex items-center justify-center transition-all duration-300 ${open === i ? "bg-th-fg border-th-fg rotate-45" : "bg-th-card/60"}`}>
-                      <svg viewBox="0 0 24 24" className={`w-[10px] h-[10px] fill-none stroke-2 [stroke-linecap:round] transition-colors duration-300 ${open === i ? "stroke-th-bg" : "stroke-th-muted"}`}>
+                    <span className={`flex-shrink-0 w-[22px] h-[22px] rounded-full border border-col-line/70 flex items-center justify-center transition-all duration-300 ${open === i ? "bg-col-primary border-col-primary rotate-45" : "bg-col-surface/60"}`}>
+                      <svg viewBox="0 0 24 24" className={`w-[10px] h-[10px] fill-none stroke-2 [stroke-linecap:round] transition-colors duration-300 ${open === i ? "stroke-col-bg" : "stroke-col-tertiary"}`}>
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
@@ -58,7 +58,7 @@ const FAQSection = () => {
                     className="overflow-hidden transition-all duration-[400ms] [cubic-bezier(0.4,0,0.2,1)]"
                     style={{ maxHeight: open === i ? "200px" : "0px", opacity: open === i ? 1 : 0 }}
                   >
-                    <p className="text-[0.84rem] text-th-muted leading-[1.75] font-normal pb-5 pr-8">{f.a}</p>
+                    <p className="text-[0.84rem] text-col-tertiary leading-[1.75] font-normal pb-5 pr-8">{f.a}</p>
                   </div>
                 </div>
               ))}
@@ -69,48 +69,48 @@ const FAQSection = () => {
           <div className="flex flex-col gap-4 sticky top-20">
             {/* Contact card */}
             <div
-              className="rounded-[22px] border border-th-border-soft/50 bg-[hsl(210_8%_96%/0.55)] px-8 py-9 flex flex-col backdrop-blur-[20px]"
-              style={{ boxShadow: "0 2px 20px var(--th-shadow), inset 0 1px 0 var(--th-glow)" }}
+              className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-8 py-9 flex flex-col backdrop-blur-[20px]"
+              style={{ boxShadow: "0 2px 20px var(--shadow), inset 0 1px 0 var(--glow)" }}
             >
-              <h3 className="text-[1.5rem] font-normal tracking-[-0.025em] leading-[1.2] mb-4 text-th-fg">
-                Still have<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-th-muted">questions?</em>
+              <h3 className="text-[1.5rem] font-normal tracking-[-0.025em] leading-[1.2] mb-4 text-col-primary">
+                Still have<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">questions?</em>
               </h3>
-              <p className="text-[0.84rem] text-th-muted leading-[1.7] font-normal mb-7">
+              <p className="text-[0.84rem] text-col-tertiary leading-[1.7] font-normal mb-7">
                 Our team responds within 4 hours on weekdays. A 30-minute scoping call is always free — no obligation, no hard sell.
               </p>
               <a
                 href="#"
-                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.06em] uppercase py-[14px] px-5 rounded-full bg-th-fg text-th-bg no-underline mb-3 transition-all duration-300 hover:opacity-85"
+                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.06em] uppercase py-[14px] px-5 rounded-full bg-col-primary text-col-bg no-underline mb-3 transition-all duration-300 hover:opacity-85"
               >
                 Book a free call
               </a>
               <a
                 href="#"
-                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.04em] py-[13px] px-5 rounded-full border border-th-border/70 bg-th-card/50 text-th-fg-mid no-underline mb-7 transition-all duration-300 hover:bg-th-card/90"
+                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.04em] py-[13px] px-5 rounded-full border border-col-line/70 bg-col-surface/50 text-col-secondary no-underline mb-7 transition-all duration-300 hover:bg-col-surface/90"
               >
                 Send us a message
               </a>
-              <div className="flex items-center gap-[10px] pt-5 border-t border-th-border/70">
-                <div className="w-2 h-2 rounded-full bg-[hsl(150_55%_50%)] flex-shrink-0 animate-th-pulse" />
-                <p className="text-[0.74rem] text-th-muted leading-[1.5]">
-                  We're online — average response <strong className="text-th-fg font-medium">&lt; 4 hours</strong>
+              <div className="flex items-center gap-[10px] pt-5 border-t border-col-line/70">
+                <div className="w-2 h-2 rounded-full bg-[hsl(150_55%_50%)] flex-shrink-0" />
+                <p className="text-[0.74rem] text-col-tertiary leading-[1.5]">
+                  We're online — average response <strong className="text-col-primary font-medium">&lt; 4 hours</strong>
                 </p>
               </div>
             </div>
 
             {/* Mini stats card */}
             <div
-              className="rounded-[22px] border border-th-border-soft/50 bg-[hsl(210_8%_96%/0.55)] px-7 py-6 flex justify-between backdrop-blur-[20px]"
-              style={{ boxShadow: "0 2px 20px var(--th-shadow), inset 0 1px 0 var(--th-glow)" }}
+              className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-7 py-6 flex justify-between backdrop-blur-[20px]"
+              style={{ boxShadow: "0 2px 20px var(--shadow), inset 0 1px 0 var(--glow)" }}
             >
               {[
-                { val: <>50<em className="font-pacifico not-italic text-[0.7em] text-th-warm">+</em></>, label: "projects delivered" },
-                { val: <>98<em className="font-pacifico not-italic text-[0.7em] text-th-warm">%</em></>, label: "on-time delivery" },
-                { val: <>4<em className="font-pacifico not-italic text-[0.7em] text-th-warm">h</em></>, label: "avg. response time" },
+                { val: <>50<em className="font-pacifico not-italic text-[0.7em] text-col-warm">+</em></>, label: "projects delivered" },
+                { val: <>98<em className="font-pacifico not-italic text-[0.7em] text-col-warm">%</em></>, label: "on-time delivery" },
+                { val: <>4<em className="font-pacifico not-italic text-[0.7em] text-col-warm">h</em></>, label: "avg. response time" },
               ].map((s, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-[1.6rem] font-light tracking-[-0.03em] leading-none text-th-fg mb-1">{s.val}</div>
-                  <div className="text-[0.62rem] tracking-[0.06em] text-th-light font-normal">{s.label}</div>
+                  <div className="text-[1.6rem] font-light tracking-[-0.03em] leading-none text-col-primary mb-1">{s.val}</div>
+                  <div className="text-[0.62rem] tracking-[0.06em] text-col-dim font-normal">{s.label}</div>
                 </div>
               ))}
             </div>

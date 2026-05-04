@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import HorizontalBrandSection from "@/components/HorizontalBrandSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import TabsSection from "@/components/TabsSection";
-import StepsSection from "@/components/StepsSection";
-import BenefitsSection from "@/components/BenefitsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import PricingSection from "@/components/PricingSection";
-import FAQSection from "@/components/FAQSection";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import HeroSection from "@/components/sections/HeroSection";
+import HorizontalBrandSection from "@/components/sections/HorizontalBrandSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import TabsSection from "@/components/sections/TabsSection";
+import StepsSection from "@/components/sections/StepsSection";
+import BenefitsSection from "@/components/sections/BenefitsSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import PricingSection from "@/components/sections/PricingSection";
+import FAQSection from "@/components/sections/FAQSection";
+import CTASection from "@/components/sections/CTASection";
 
 const Index = () => {
   useEffect(() => {

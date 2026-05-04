@@ -90,7 +90,6 @@ const HeroSection = () => {
       const width = rect.width;
       const height = rect.height;
 
-      // ✅ FORCE EXACT MATCH
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
@@ -104,7 +103,6 @@ const HeroSection = () => {
 
       if (!img) return;
 
-      // 🔥 PERFECT OBJECT-COVER MATCH
       const scale = Math.max(width / img.width, height / img.height);
       const drawWidth = img.width * scale;
       const drawHeight = img.height * scale;
@@ -130,13 +128,11 @@ const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="relative h-[500vh] w-full bg-black">
-      
       <div
         ref={containerRef}
         className="sticky top-0 h-[120vh] w-full flex items-center justify-center overflow-hidden perspective-[1200px]"
       >
-
-        {/* 🔥 HERO IMAGE */}
+        {/* Hero image */}
         <motion.img
           src={heroBg}
           alt=""
@@ -146,7 +142,7 @@ const HeroSection = () => {
           transition={{ duration: 1.5 }}
         />
 
-        {/* 🔥 CANVAS (NOW PERFECTLY MATCHED) */}
+        {/* Canvas (scroll-driven frame sequence) */}
         <canvas
           ref={canvasRef}
           className={`absolute inset-0 z-[1] ${
@@ -154,10 +150,9 @@ const HeroSection = () => {
           }`}
         />
 
-        {/* <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent to-black/70" /> */}
         <div className="hero-grain absolute inset-0 z-[3]" />
 
-        {/* TEXT */}
+        {/* Heading */}
         <motion.div
           style={{
             y: textParallaxY,
@@ -181,4 +176,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

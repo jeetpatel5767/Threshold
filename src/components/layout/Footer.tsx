@@ -1,17 +1,17 @@
 const Footer = () => (
-  <footer className="bg-th-footer border-t border-th-border/70">
+  <footer className="bg-col-footer border-t border-col-line/70">
     <div className="max-w-[1280px] mx-auto px-12">
       {/* Main grid */}
-      <div className="grid gap-12 py-16 border-b border-th-border/70" style={{ gridTemplateColumns: "1.6fr 1fr 1fr 1fr" }}>
+      <div className="grid gap-12 py-16 border-b border-col-line/70" style={{ gridTemplateColumns: "1.6fr 1fr 1fr 1fr" }}>
         {/* Brand col */}
         <div>
           <div className="flex items-center gap-[7px] mb-5">
-            <div className="w-[7px] h-[7px] rounded-full bg-th-warm flex-shrink-0" />
-            <div className="text-[1rem] tracking-[-0.01em] font-normal text-th-fg leading-none">
-              <span>Thres</span><span className="font-pacifico text-th-muted font-normal">hold</span>
+            <div className="w-[7px] h-[7px] rounded-full bg-col-warm flex-shrink-0" />
+            <div className="text-[1rem] tracking-[-0.01em] font-normal text-col-primary leading-none">
+              <span>Thres</span><span className="font-pacifico text-col-tertiary font-normal">hold</span>
             </div>
           </div>
-          <p className="text-[0.78rem] text-th-light leading-[1.7] font-normal max-w-[240px] mb-6">
+          <p className="text-[0.78rem] text-col-dim leading-[1.7] font-normal max-w-[240px] mb-6">
             A premium digital agency specialising in UI/UX, frontend engineering, AI systems, cybersecurity, and Web3.
           </p>
           <div className="flex items-center gap-[10px]">
@@ -24,7 +24,7 @@ const Footer = () => (
               <a
                 key={i}
                 href="#"
-                className="w-[34px] h-[34px] rounded-full border border-th-border/70 bg-th-card/50 flex items-center justify-center transition-all duration-300 hover:bg-th-card hover:shadow-[0_2px_10px_var(--th-shadow)] hover:text-th-fg text-th-light"
+                className="w-[34px] h-[34px] rounded-full border border-col-line/70 bg-col-surface/50 flex items-center justify-center transition-all duration-300 hover:bg-col-surface hover:shadow-[0_2px_10px_var(--shadow)] hover:text-col-primary text-col-dim"
               >
                 <svg viewBox="0 0 24 24" className="w-[14px] h-[14px] stroke-current fill-none [stroke-linecap:round] [stroke-linejoin:round]" strokeWidth="1.6">
                   {icon}
@@ -36,7 +36,7 @@ const Footer = () => (
 
         {/* Services */}
         <div>
-          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-th-light font-normal mb-5">Services</p>
+          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-col-dim font-normal mb-5">Services</p>
           <div className="flex flex-col gap-[10px]">
             {[
               { label: "UI/UX Design", href: "#services" },
@@ -45,9 +45,9 @@ const Footer = () => (
               { label: "Cybersecurity", href: "#services" },
               { label: "Web3 & Blockchain", href: "#services" },
             ].map(({ label, href, badge }) => (
-              <a key={label} href={href} className="text-[0.78rem] text-th-muted no-underline font-normal transition-colors duration-300 hover:text-th-fg flex items-center gap-2">
+              <a key={label} href={href} className="text-[0.78rem] text-col-tertiary no-underline font-normal transition-colors duration-300 hover:text-col-primary flex items-center gap-2">
                 {label}
-                {badge && <span className="text-[0.52rem] tracking-[0.1em] uppercase px-[7px] py-[2px] rounded-full bg-[hsl(30_10%_88%)] text-th-warm border border-th-border/70">{badge}</span>}
+                {badge && <span className="text-[0.52rem] tracking-[0.1em] uppercase px-[7px] py-[2px] rounded-full bg-[hsl(30_10%_88%)] text-col-warm border border-col-line/70">{badge}</span>}
               </a>
             ))}
           </div>
@@ -55,7 +55,7 @@ const Footer = () => (
 
         {/* Company */}
         <div>
-          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-th-light font-normal mb-5">Company</p>
+          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-col-dim font-normal mb-5">Company</p>
           <div className="flex flex-col gap-[10px]">
             {[
               { label: "About", href: "#" },
@@ -65,31 +65,31 @@ const Footer = () => (
               { label: "Blog", href: "#" },
               { label: "Careers", href: "#" },
             ].map(({ label, href }) => (
-              <a key={label} href={href} className="text-[0.78rem] text-th-muted no-underline font-normal transition-colors duration-300 hover:text-th-fg">{label}</a>
+              <a key={label} href={href} className="text-[0.78rem] text-col-tertiary no-underline font-normal transition-colors duration-300 hover:text-col-primary">{label}</a>
             ))}
           </div>
         </div>
 
         {/* Contact + Legal */}
         <div>
-          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-th-light font-normal mb-5">Contact</p>
+          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-col-dim font-normal mb-5">Contact</p>
           <div className="flex flex-col gap-[10px] mb-7">
             {[
               { label: "hello@threshold.studio", href: "mailto:hello@threshold.studio" },
               { label: "Book a call", href: "#" },
               { label: "Start a project", href: "#cta" },
             ].map(({ label, href }) => (
-              <a key={label} href={href} className="text-[0.78rem] text-th-muted no-underline font-normal transition-colors duration-300 hover:text-th-fg">{label}</a>
+              <a key={label} href={href} className="text-[0.78rem] text-col-tertiary no-underline font-normal transition-colors duration-300 hover:text-col-primary">{label}</a>
             ))}
           </div>
-          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-th-light font-normal mb-5">Legal</p>
+          <p className="text-[0.62rem] tracking-[0.2em] uppercase text-col-dim font-normal mb-5">Legal</p>
           <div className="flex flex-col gap-[10px]">
             {[
               { label: "Privacy Policy", href: "#" },
               { label: "Terms of Service", href: "#" },
               { label: "Cookie Policy", href: "#" },
             ].map(({ label, href }) => (
-              <a key={label} href={href} className="text-[0.78rem] text-th-muted no-underline font-normal transition-colors duration-300 hover:text-th-fg">{label}</a>
+              <a key={label} href={href} className="text-[0.78rem] text-col-tertiary no-underline font-normal transition-colors duration-300 hover:text-col-primary">{label}</a>
             ))}
           </div>
         </div>
@@ -97,16 +97,16 @@ const Footer = () => (
 
       {/* Bottom bar */}
       <div className="flex items-center justify-between py-6 flex-wrap gap-4">
-        <p className="text-[0.72rem] text-th-light font-normal">
+        <p className="text-[0.72rem] text-col-dim font-normal">
           © 2026 <em className="font-pacifico not-italic">Threshold</em> Studio. All rights reserved.
         </p>
-        <div className="flex items-center gap-[8px] text-[0.7rem] text-th-light">
-          <div className="w-[6px] h-[6px] rounded-full bg-[hsl(150_55%_50%)] animate-th-pulse flex-shrink-0" />
+        <div className="flex items-center gap-[8px] text-[0.7rem] text-col-dim">
+          <div className="w-[6px] h-[6px] rounded-full bg-[hsl(150_55%_50%)] flex-shrink-0" />
           All systems operational
         </div>
         <div className="flex items-center gap-5">
           {["Privacy", "Terms", "Cookies"].map((l) => (
-            <a key={l} href="#" className="text-[0.7rem] text-th-light no-underline transition-colors duration-300 hover:text-th-muted">{l}</a>
+            <a key={l} href="#" className="text-[0.7rem] text-col-dim no-underline transition-colors duration-300 hover:text-col-tertiary">{l}</a>
           ))}
         </div>
       </div>
