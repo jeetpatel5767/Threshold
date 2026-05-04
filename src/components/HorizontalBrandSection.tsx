@@ -9,20 +9,21 @@ const HorizontalBrandSection = () => {
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["105vw", "-220vw"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["100vw", "-290vw"]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative -mt-20 h-[300vh] overflow-hidden bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(18,18,18,0.22)_24%,rgba(8,9,12,0.72)_60%,hsl(var(--background))_100%)]"
+      className="relative h-[350vh]"
+      style={{ background: "radial-gradient(ellipse 60% 40% at 80% 20%, hsl(210 12% 96%) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, hsl(215 8% 88%) 0%, transparent 55%)" }}
     >
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex items-center whitespace-nowrap">
-          <div className="flex items-center gap-10">
-            <div className="h-24 w-24 md:h-32 md:w-32 rounded-full bg-foreground shrink-0" />
-            <span className="inline-flex items-baseline gap-0 leading-none text-[33vw] md:text-[25vw] lg:text-[20vw]">
-              <span className="font-heading font-extrabold text-foreground">Thres</span>
-              <span className="font-into text-[#121212]/55">hold</span>
+          <div className="flex items-center gap-[3vw]">
+            <div className="rounded-full bg-th-fg shrink-0 shadow-[0_4px_24px_rgba(0,0,0,0.06)]" style={{ width: "20vw", height: "20vw" }} />
+            <span className="inline-flex items-baseline gap-0 leading-none" style={{ fontSize: "27vw" }}>
+              <span className="font-heading font-extrabold text-th-fg">Thres</span>
+              <span className="font-pacifico text-th-muted">hold</span>
             </span>
           </div>
         </motion.div>

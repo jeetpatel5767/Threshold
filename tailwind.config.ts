@@ -1,9 +1,14 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
-  prefix: "",
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -14,15 +19,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Syne', 'sans-serif'],
-        body: ['Syne', 'sans-serif'],
+        heading: ["Syne", "sans-serif"],
+        body: ["Syne", "sans-serif"],
+        pacifico: ["Pacifico", "cursive"], // ← added (you were missing this)
       },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -51,6 +59,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+        // ✅ Your copied color system
+        th: {
+          bg: "hsl(210 8% 91%)",
+          "bg-mid": "hsl(210 6% 84%)",
+          "bg-alt": "hsl(215 7% 87%)",
+          fg: "hsl(220 12% 18%)",
+          "fg-mid": "hsl(220 8% 32%)",
+          muted: "hsl(215 8% 52%)",
+          light: "hsl(210 6% 68%)",
+          warm: "hsl(30 8% 55%)",
+          card: "hsl(210 10% 96%)",
+          "card-solid": "hsl(210 8% 93%)",
+          border: "hsl(210 8% 80%)",
+          "border-soft": "hsl(210 8% 86%)",
+          footer: "hsl(215 8% 86%)",
+        },
+
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -62,11 +88,13 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -80,13 +108,27 @@ export default {
           from: { opacity: "0", transform: "translateY(30px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "orb-float": {
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-24px) scale(1.04)" },
+        },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "orb-float": "orb-float 8s ease-in-out infinite",
+        "marquee": "marquee 28s linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+
+  plugins: [animate],
+};
+
+export default config;

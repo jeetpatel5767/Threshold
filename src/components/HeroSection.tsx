@@ -154,7 +154,7 @@ const HeroSection = () => {
           }`}
         />
 
-        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent to-black/70" />
+        {/* <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent to-black/70" /> */}
         <div className="hero-grain absolute inset-0 z-[3]" />
 
         {/* TEXT */}

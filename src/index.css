@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&display=swap');
 
 @tailwind base;
@@ -28,39 +27,34 @@
     --input: 220 14% 18%;
     --ring: 170 60% 45%;
     --radius: 0.75rem;
-    --sidebar-background: 220 18% 8%;
-    --sidebar-foreground: 0 0% 85%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 220 20% 6%;
-    --sidebar-accent: 220 14% 16%;
-    --sidebar-accent-foreground: 0 0% 85%;
-    --sidebar-border: 220 14% 18%;
-    --sidebar-ring: 170 60% 45%;
-    --font-heading: 'Syne', sans-serif;
-    --font-body: 'Syne', sans-serif;
+
+    /* Threshold palette */
+    --th-shadow:     hsl(220 12% 60% / 0.12);
+    --th-shadow-lg:  hsl(220 12% 50% / 0.18);
+    --th-glow:       hsl(210 20% 98% / 0.8);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-body);
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; font-family: 'Syne', sans-serif; }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; }
+}
+
+/* Threshold page body override */
+body.threshold-body {
+  background: hsl(210 8% 91%);
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% 0%, hsl(210 12% 96%) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 20% 100%, hsl(215 10% 82%) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, hsl(220 8% 86%) 0%, transparent 50%);
+  color: hsl(220 12% 18%);
+  overflow-x: hidden;
 }
 
 @layer utilities {
-  .font-into {
-    font-family: "Pacifico", cursive;
-  }
-  .font-playwrite {
-    font-family: "Playwrite US Trad", cursive;
-  }
+  .font-into { font-family: "Pacifico", cursive; }
+  .font-playwrite { font-family: "Playwrite US Trad", cursive; }
   .hero-grain {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch' /%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='1' /%3E%3C/svg%3E");
     background-size: 220px 220px;
@@ -73,10 +67,52 @@
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 10% 65%));
   }
-  .glass-card {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50;
+  .glass-card { @apply bg-card/50 backdrop-blur-xl border border-border/50; }
+
+  /* Star clip-path for testimonial ratings */
+  .star-shape {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   }
-  .section-label {
-    @apply text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4;
-  }
+}
+
+/* Process step circle — conic-gradient + mask can't be done in Tailwind */
+.process-circle-outer {
+  position: relative;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 1px solid hsl(210 8% 80% / 0.7);
+  display: flex; align-items: center; justify-content: center;
+}
+.process-circle-outer::before {
+  content: '';
+  position: absolute; inset: -1px;
+  border-radius: 50%;
+  background: conic-gradient(hsl(220 8% 32%) var(--pct, 25%), transparent 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
+}
+
+/* Benefits section grid lines ::before — repeating gradient */
+.benefits-grid-bg {
+  position: relative;
+}
+.benefits-grid-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent, transparent 80px, hsl(215 8% 86%) 80px, hsl(215 8% 86%) 81px),
+    repeating-linear-gradient(0deg, transparent, transparent 80px, hsl(215 8% 86%) 80px, hsl(215 8% 86%) 81px);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* CTA section noise ::after */
+.cta-noise::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 220px;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }

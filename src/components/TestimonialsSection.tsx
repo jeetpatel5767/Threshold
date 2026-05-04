@@ -1,62 +1,121 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const testimonials = [
-  {
-    text: "I've tried every AI tool out there, but this one feels different — like it was crafted to be invisible, make me forget I'm using AI at all. Closer. Perfect for my daily workflow.",
-    name: "Joanne S.",
-    role: "Product Designer",
-  },
-  {
-    text: "Within days, this transformed my creative process. The balance of simplicity and depth is remarkable — I've been searching for exactly this kind of tool for years.",
-    name: "Marco T.",
-    role: "Content Strategist",
-  },
-  {
-    text: "What makes this truly special is how it handles complex problems so effortlessly. My clients are impressed with the quality of output. Can't imagine working without it now.",
-    name: "Sarah L.",
-    role: "Freelance Writer",
-  },
+  { initials: "JM", name: "James Mercer",   role: "CTO, Luminary Finance",           tag: "Frontend + AI",  quote: <>Working with Threshold was unlike any agency experience I've had. They delivered a product that felt <em className="italic text-th-fg">genuinely considered</em> — every interaction, every edge case, every pixel. Our users noticed immediately.</> },
+  { initials: "SR", name: "Sofia Reyes",    role: "Head of Engineering, Vault Pay",  tag: "Cybersecurity",  quote: <>They came in, understood our security posture in days, and fixed vulnerabilities our internal team had missed for months. <em className="italic text-th-fg">Zero drama, maximum impact.</em> We'd cleared SOC 2 in 8 weeks.</> },
+  { initials: "AK", name: "Arjun Kapoor",  role: "Product Lead, Aura Health",       tag: "UI/UX Design",   quote: <>The design system they built has scaled across 6 products without breaking. Three years in and <em className="italic text-th-fg">we're still referencing their component library.</em> That's how good the foundations were.</> },
+  { initials: "LP", name: "Laura Petit",   role: "CEO, Signal Legal Tech",          tag: "AI Systems",     quote: <>Our AI pipeline went from idea to production in six weeks. The team knew their way around LLMs, infrastructure, and product thinking all at once. <em className="italic text-th-fg">That breadth is rare.</em></> },
+  { initials: "DW", name: "David Wu",      role: "Founder, ChainFlow Protocol",     tag: "Web3",           quote: <>$2M TVL in 30 days and not a single critical bug post-audit. <em className="italic text-th-fg">They knew the DeFi space deeply</em> — security, UX, and the on-chain architecture. Exactly the partner we needed.</> },
+  { initials: "NB", name: "Nina Berg",     role: "Operations Director, Nexus Logistics", tag: "Full Stack", quote: <>Daily updates, real staging previews, no surprises. The transparency alone was worth it — but then they also delivered <em className="italic text-th-fg">a product our whole team is proud to show.</em></> },
 ];
 
+const CARDS_VIS = 3;
+const T_TOTAL = testimonials.length;
+const cardShadow = "0 2px 16px var(--th-shadow), inset 0 1px 0 var(--th-glow)";
+
 const TestimonialsSection = () => {
-  const [page, setPage] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const max = T_TOTAL - CARDS_VIS;
+
+  const goTo = (idx: number) => setCurrent(Math.min(Math.max(idx, 0), max));
+
+  useEffect(() => {
+    const card = trackRef.current?.querySelector<HTMLElement>(".t-card-item");
+    if (!card || !trackRef.current) return;
+    const w = card.offsetWidth + 20;
+    trackRef.current.style.transform = `translateX(-${current * w}px)`;
+  }, [current]);
+
+  useEffect(() => {
+    const t = setInterval(() => setCurrent((c) => (c + 1 > max ? 0 : c + 1)), 4000);
+    return () => clearInterval(t);
+  }, [max]);
+
+  const fillPct = ((current + CARDS_VIS) / T_TOTAL) * 100;
+  let touchX = 0;
 
   return (
-    <section className="py-24 md:py-32">
-      <div className="container mx-auto px-6">
-        <p className="section-label">Social Proof</p>
-        <h2 className="font-heading font-bold text-3xl md:text-4xl max-w-lg mb-14">
-          What others whisper <span className="italic font-normal">about the experience</span>
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <AnimatePresence mode="wait">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                className="glass-card rounded-xl p-6 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">"{t.text}"</p>
-                <div>
-                  <p className="font-heading font-semibold text-sm">{t.name}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+    <section className="py-[120px] pb-[140px]">
+      <div className="max-w-[1280px] mx-auto px-12">
+        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-th-light mb-5">
+          <span className="inline-block w-5 h-px bg-th-warm flex-shrink-0" />Client voices
+        </p>
+
+        <div className="flex items-end justify-between mb-14">
+          <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-th-fg max-w-[500px]">
+            What <em className="font-pacifico not-italic font-normal text-[0.9em] text-th-muted">clients</em><br />say about us
+          </h2>
+          <div className="flex items-center gap-[10px] flex-shrink-0">
+            <button onClick={() => goTo(current - 1)} className="w-[42px] h-[42px] rounded-full border border-th-border/70 bg-th-card/60 text-th-muted flex items-center justify-center cursor-pointer backdrop-blur-[12px] transition-all duration-300 hover:shadow-[0_2px_12px_var(--th-shadow-lg)] hover:text-th-fg">
+              <svg viewBox="0 0 24 24" className="w-[17px] h-[17px] stroke-current fill-none stroke-[1.6] [stroke-linecap:round] [stroke-linejoin:round]"><polyline points="15 18 9 12 15 6" /></svg>
+            </button>
+            <span className="text-[0.72rem] text-th-muted min-w-[48px] text-center tracking-[0.06em]">
+              <span className="text-th-fg font-medium">{current + 1}</span> / {T_TOTAL}
+            </span>
+            <button onClick={() => goTo(current + 1)} className="w-[42px] h-[42px] rounded-full border border-th-border/70 bg-th-card/60 text-th-muted flex items-center justify-center cursor-pointer backdrop-blur-[12px] transition-all duration-300 hover:shadow-[0_2px_12px_var(--th-shadow-lg)] hover:text-th-fg">
+              <svg viewBox="0 0 24 24" className="w-[17px] h-[17px] stroke-current fill-none stroke-[1.6] [stroke-linecap:round] [stroke-linejoin:round]"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
+          </div>
         </div>
-        <div className="flex gap-2 justify-end mt-8">
-          <button className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
-            <ChevronLeft size={18} />
-          </button>
-          <button className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
-            <ChevronRight size={18} />
-          </button>
+
+        {/* Carousel */}
+        <div className="overflow-hidden relative">
+          <div
+            ref={trackRef}
+            className="flex gap-5 transition-transform duration-[600ms] [cubic-bezier(0.4,0,0.2,1)] will-change-transform"
+            onTouchStart={(e) => { touchX = e.touches[0].clientX; }}
+            onTouchEnd={(e) => { const dx = touchX - e.changedTouches[0].clientX; if (Math.abs(dx) > 40) goTo(dx > 0 ? current + 1 : current - 1); }}
+          >
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className="t-card-item bg-[hsl(210_8%_96%/0.55)] border border-th-border-soft/50 rounded-[20px] p-9 flex flex-col justify-between min-h-[280px] relative overflow-hidden backdrop-blur-[20px] flex-shrink-0 transition-[box-shadow] duration-[400ms] hover:shadow-[0_6px_32px_var(--th-shadow-lg),inset_0_1px_0_var(--th-glow)]"
+                style={{ flex: `0 0 calc((100% - 40px) / 3)`, boxShadow: cardShadow }}
+              >
+                <div className="font-pacifico text-[5rem] leading-[0.8] text-[hsl(215_8%_84%)] absolute top-5 right-6 select-none pointer-events-none">"</div>
+                <div>
+                  <div className="flex gap-[3px] mb-5">
+                    {[...Array(5)].map((_, j) => (
+                      <span key={j} className="w-3 h-3 bg-th-warm star-shape block" />
+                    ))}
+                  </div>
+                  <p className="text-[0.88rem] text-th-muted leading-[1.8] font-normal relative z-[1]">{t.quote}</p>
+                </div>
+                <div className="flex items-center gap-[14px] mt-7 pt-5 border-t border-th-border/70">
+                  <div className="w-[38px] h-[38px] rounded-full bg-[hsl(210_8%_90%)] border border-th-border/70 flex items-center justify-center flex-shrink-0 text-[0.68rem] font-medium text-th-muted tracking-[0.05em]">{t.initials}</div>
+                  <div>
+                    <p className="text-[0.84rem] font-medium text-th-fg tracking-[-0.01em]">{t.name}</p>
+                    <p className="text-[0.7rem] text-th-light mt-[2px]">{t.role}</p>
+                  </div>
+                  <span className="ml-auto text-[0.58rem] tracking-[0.1em] uppercase px-[10px] py-1 rounded-full border border-th-border/70 bg-th-card/60 text-th-light whitespace-nowrap">{t.tag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Progress */}
+        <div className="flex items-center gap-4 mt-9">
+          <div className="flex-1 h-px bg-th-border/70 rounded-px relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 bg-th-fg-mid rounded-px transition-[width] duration-[600ms] [cubic-bezier(0.4,0,0.2,1)]" style={{ width: `${fillPct}%` }} />
+          </div>
+          <div className="flex gap-[6px]">
+            {testimonials.map((_, i) => (
+              <div key={i} onClick={() => goTo(i)} className={`w-1 h-1 rounded-full cursor-pointer transition-all duration-300 ${i === current ? "bg-th-fg-mid scale-[1.4]" : "bg-th-border/70"}`} />
+            ))}
+          </div>
+        </div>
+
+        {/* Trust logos */}
+        <div className="flex items-center gap-8 mt-[72px] pt-12 border-t border-th-border/70 flex-wrap">
+          <span className="text-[0.62rem] tracking-[0.2em] uppercase text-th-light whitespace-nowrap flex-shrink-0">Trusted by</span>
+          <div className="w-px h-5 bg-th-border/70 flex-shrink-0" />
+          <div className="flex gap-8 items-center flex-wrap">
+            {["Luminary","Vault Pay","Aura Health","Signal","ChainFlow","Nexus"].map((l) => (
+              <span key={l} className="text-[0.75rem] font-normal tracking-[0.1em] uppercase text-th-light transition-colors duration-300 hover:text-th-muted">{l}</span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

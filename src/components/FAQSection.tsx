@@ -1,41 +1,124 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useState } from "react";
 
-const faqs = [
-  { q: "What is this platform designed for?", a: "Nioscape is built for creators, writers, and professionals who want AI to quietly enhance their workflow without getting in the way." },
-  { q: "How does it integrate with my existing tools?", a: "We offer native integrations with popular tools like Notion, Google Docs, and Slack, plus an API for custom workflows." },
-  { q: "Is there a free trial or plan?", a: "Yes, our Starter plan is completely free and includes core features to get you started. Upgrade anytime." },
-  { q: "Can I use this for large-scale projects?", a: "Absolutely — our Enterprise plan is designed to handle complex, high-volume workloads with dedicated support." },
-  { q: "What kind of support is offered?", a: "We provide community support for free users, priority email support for Pro, and a dedicated account manager for Enterprise." },
-  { q: "How is data handled for privacy purposes?", a: "Your data is encrypted at rest and in transit. We never train on your content and you can delete your data at any time." },
+const faqs: { q: string; a: React.ReactNode }[] = [
+  { q: "How long does a typical project take?", a: <>Starter projects run 4–6 weeks. Growth engagements run 8–12 weeks. Enterprise scopes vary — we'll give you a precise timeline after the discovery phase. We've never missed a deadline we committed to.</> },
+  { q: "What tech stack do you work with?", a: <>Our primary stack is <em>React / Next.js / TypeScript</em> on the frontend, Node.js or Python on the backend, and AWS or Vercel for infrastructure. For Web3 we use Solidity + Hardhat. For AI we work with OpenAI, Anthropic, and LangChain.</> },
+  { q: "Do you sign NDAs and handle IP assignment?", a: <>Yes — always. We sign NDAs before any discovery session and full IP assignment is included in all Growth and Enterprise contracts. Everything we build for you is yours from day one.</> },
+  { q: "How many revisions are included?", a: <>Starter plans include 2 structured revision rounds. Growth and Enterprise plans include unlimited revisions — we iterate until the work is right. We've never had a client unhappy at handoff.</> },
+  { q: "Can you work with our existing team?", a: <>Absolutely — we embed into client teams regularly. We'll work inside your repos, attend your standups, and integrate with your tooling (Jira, Linear, Notion, Slack).</> },
+  { q: "What happens after launch?", a: <>All projects include a post-launch hypercare period (30 days for Starter, 60 for Growth). We monitor, fix issues, and stay available. After that, most clients move to a retainer — or call us back for the next phase.</> },
+  { q: "Do you work with early-stage startups?", a: <>Yes — roughly half our clients are pre-Series A. We're used to working fast under constraints, building for scale from the start, and making technical decisions that don't need to be undone later.</> },
 ];
 
-const FAQSection = () => (
-  <section id="faq" className="py-24 md:py-32">
-    <div className="container mx-auto px-6">
-      <p className="section-label">Support</p>
-      <h2 className="font-heading font-bold text-3xl md:text-4xl max-w-lg mb-12">
-        Your questions, <span className="italic font-normal">answered with clarity</span>
-      </h2>
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-0 max-w-4xl">
-        <Accordion type="single" collapsible className="space-y-0">
-          {faqs.slice(0, 3).map((f, i) => (
-            <AccordionItem key={i} value={`a-${i}`} className="border-border/50">
-              <AccordionTrigger className="text-sm font-medium hover:no-underline py-5">{f.q}</AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-        <Accordion type="single" collapsible className="space-y-0">
-          {faqs.slice(3).map((f, i) => (
-            <AccordionItem key={i} value={`b-${i}`} className="border-border/50">
-              <AccordionTrigger className="text-sm font-medium hover:no-underline py-5">{f.q}</AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+const FAQSection = () => {
+  const [open, setOpen] = useState(0);
+
+  return (
+    <section
+      className="py-[120px] pb-[140px] relative overflow-hidden"
+      id="faq"
+      style={{ background: "radial-gradient(ellipse 70% 60% at 30% 50%, hsl(210 10% 88%) 0%, hsl(215 8% 91%) 100%)" }}
+    >
+      <div className="max-w-[1280px] mx-auto px-12">
+        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-th-light mb-5">
+          <span className="inline-block w-5 h-px bg-th-warm flex-shrink-0" />Support
+        </p>
+
+        <div className="grid gap-16 items-start" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
+          {/* Left — heading + accordion */}
+          <div>
+            <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-th-fg max-w-[480px] mb-[14px]">
+              Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-th-muted">answered</em> plainly
+            </h2>
+            <p className="text-[0.88rem] text-th-muted leading-[1.7] font-normal mb-[52px] max-w-[400px]">
+              No fluff, no vague promises — just straight answers to what teams ask us most before they commit.
+            </p>
+
+            <div className="flex flex-col">
+              {faqs.map((f, i) => (
+                <div
+                  key={i}
+                  className="border-b border-th-border/70 last:border-none"
+                >
+                  <button
+                    onClick={() => setOpen(open === i ? -1 : i)}
+                    className="w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer bg-transparent border-none"
+                  >
+                    <span className={`text-[0.9rem] font-normal leading-[1.4] transition-colors duration-300 ${open === i ? "text-th-fg" : "text-th-muted"}`}>
+                      {f.q}
+                    </span>
+                    <span className={`flex-shrink-0 w-[22px] h-[22px] rounded-full border border-th-border/70 flex items-center justify-center transition-all duration-300 ${open === i ? "bg-th-fg border-th-fg rotate-45" : "bg-th-card/60"}`}>
+                      <svg viewBox="0 0 24 24" className={`w-[10px] h-[10px] fill-none stroke-2 [stroke-linecap:round] transition-colors duration-300 ${open === i ? "stroke-th-bg" : "stroke-th-muted"}`}>
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </span>
+                  </button>
+                  <div
+                    className="overflow-hidden transition-all duration-[400ms] [cubic-bezier(0.4,0,0.2,1)]"
+                    style={{ maxHeight: open === i ? "200px" : "0px", opacity: open === i ? 1 : 0 }}
+                  >
+                    <p className="text-[0.84rem] text-th-muted leading-[1.75] font-normal pb-5 pr-8">{f.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right — contact card + stats */}
+          <div className="flex flex-col gap-4 sticky top-20">
+            {/* Contact card */}
+            <div
+              className="rounded-[22px] border border-th-border-soft/50 bg-[hsl(210_8%_96%/0.55)] px-8 py-9 flex flex-col backdrop-blur-[20px]"
+              style={{ boxShadow: "0 2px 20px var(--th-shadow), inset 0 1px 0 var(--th-glow)" }}
+            >
+              <h3 className="text-[1.5rem] font-normal tracking-[-0.025em] leading-[1.2] mb-4 text-th-fg">
+                Still have<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-th-muted">questions?</em>
+              </h3>
+              <p className="text-[0.84rem] text-th-muted leading-[1.7] font-normal mb-7">
+                Our team responds within 4 hours on weekdays. A 30-minute scoping call is always free — no obligation, no hard sell.
+              </p>
+              <a
+                href="#"
+                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.06em] uppercase py-[14px] px-5 rounded-full bg-th-fg text-th-bg no-underline mb-3 transition-all duration-300 hover:opacity-85"
+              >
+                Book a free call
+              </a>
+              <a
+                href="#"
+                className="block text-center font-['Syne'] text-[0.82rem] font-medium tracking-[0.04em] py-[13px] px-5 rounded-full border border-th-border/70 bg-th-card/50 text-th-fg-mid no-underline mb-7 transition-all duration-300 hover:bg-th-card/90"
+              >
+                Send us a message
+              </a>
+              <div className="flex items-center gap-[10px] pt-5 border-t border-th-border/70">
+                <div className="w-2 h-2 rounded-full bg-[hsl(150_55%_50%)] flex-shrink-0 animate-th-pulse" />
+                <p className="text-[0.74rem] text-th-muted leading-[1.5]">
+                  We're online — average response <strong className="text-th-fg font-medium">&lt; 4 hours</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* Mini stats card */}
+            <div
+              className="rounded-[22px] border border-th-border-soft/50 bg-[hsl(210_8%_96%/0.55)] px-7 py-6 flex justify-between backdrop-blur-[20px]"
+              style={{ boxShadow: "0 2px 20px var(--th-shadow), inset 0 1px 0 var(--th-glow)" }}
+            >
+              {[
+                { val: <>50<em className="font-pacifico not-italic text-[0.7em] text-th-warm">+</em></>, label: "projects delivered" },
+                { val: <>98<em className="font-pacifico not-italic text-[0.7em] text-th-warm">%</em></>, label: "on-time delivery" },
+                { val: <>4<em className="font-pacifico not-italic text-[0.7em] text-th-warm">h</em></>, label: "avg. response time" },
+              ].map((s, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-[1.6rem] font-light tracking-[-0.03em] leading-none text-th-fg mb-1">{s.val}</div>
+                  <div className="text-[0.62rem] tracking-[0.06em] text-th-light font-normal">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default FAQSection;
