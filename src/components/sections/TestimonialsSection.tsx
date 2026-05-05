@@ -36,15 +36,15 @@ const TestimonialsSection = () => {
   let touchX = 0;
 
   return (
-    <section className="py-[120px] pb-[140px]">
-      <div className="max-w-[1280px] mx-auto px-12">
+    <section className="py-[120px] pb-[140px] section-transparent relative">
+      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
         <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Client voices
         </p>
 
         <div className="flex items-end justify-between mb-14">
           <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[500px]">
-            What <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">clients</em><br />say about us
+            What <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">clients</em><br />say about us
           </h2>
           <div className="flex items-center gap-[10px] flex-shrink-0">
             <button onClick={() => goTo(current - 1)} className="w-[42px] h-[42px] rounded-full border border-col-line/70 bg-col-surface/60 text-col-tertiary flex items-center justify-center cursor-pointer backdrop-blur-[12px] transition-all duration-300 hover:shadow-[0_2px_12px_var(--shadow-lg)] hover:text-col-primary">

@@ -70,16 +70,14 @@ const Tag = ({ label }: { label: string }) => (
 );
 
 const FeaturesSection = () => (
-  <section className="py-[120px] pb-[140px]" id="services"
-    style={{ background: "radial-gradient(ellipse 60% 40% at 80% 20%, hsl(210 12% 96%) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, hsl(215 8% 88%) 0%, transparent 55%)" }}
-  >
-    <div className="max-w-[1280px] mx-auto px-12">
+  <section className="py-[120px] pb-[140px] section-transparent relative" id="services">
+    <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
       <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
         <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />
         What we build
       </p>
       <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[600px] mb-4">
-        Your vision,<br />executed <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">flawlessly</em>
+        Your vision,<br />executed <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">flawlessly</em>
       </h2>
       <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[420px] mb-[72px]">
         We design, build, and ship digital products that perform — from first pixel to final deployment.

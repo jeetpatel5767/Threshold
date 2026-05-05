@@ -30,17 +30,15 @@ const PricingSection = () => {
 
   return (
     <section
-      className="py-[120px] pb-[140px] relative overflow-hidden"
+      className="py-[120px] pb-[140px] relative section-transparent"
       id="pricing"
-      style={{ background: "radial-gradient(ellipse 70% 60% at 60% 40%, hsl(210 10% 88%) 0%, hsl(215 8% 91%) 100%)" }}
     >
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(ellipse 50% 40% at 70% 50%, hsl(30 8% 90% / 0.5) 0%, transparent 60%)" }} />
       <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
         <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Investment
         </p>
         <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[600px] mb-[14px]">
-          Pricing that reflects<br />the <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">value</em> we deliver
+          pricing that reflects<br />the <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">value</em> we deliver
         </h2>
         <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[440px] mb-[52px]">
           Three engagement models designed around how teams actually work — from focused projects to long-term partnerships.

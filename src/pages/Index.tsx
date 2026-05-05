@@ -19,18 +19,25 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <div className="global-blob-container">
+        <div className="blob blob-1" />
+        <div className="blob blob-2" />
+        <div className="blob blob-3" />
+      </div>
       <Navbar />
       <HeroSection />
       <HorizontalBrandSection />
-      <FeaturesSection />
-      <TabsSection />
-      <StepsSection />
-      <BenefitsSection />
-      <TestimonialsSection />
-      <PricingSection />
-      <FAQSection />
-      <CTASection />
+      <div className="relative z-10">
+        <FeaturesSection />
+        <TabsSection />
+        <StepsSection />
+        <BenefitsSection />
+        <TestimonialsSection />
+        <PricingSection />
+        <FAQSection />
+        <CTASection />
+      </div>
       <Footer />
     </div>
   );

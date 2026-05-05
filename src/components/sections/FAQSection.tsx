@@ -15,11 +15,10 @@ const FAQSection = () => {
 
   return (
     <section
-      className="py-[120px] pb-[140px] relative overflow-hidden"
+      className="py-[120px] pb-[140px] relative section-transparent"
       id="faq"
-      style={{ background: "radial-gradient(ellipse 70% 60% at 30% 50%, hsl(210 10% 88%) 0%, hsl(215 8% 91%) 100%)" }}
     >
-      <div className="max-w-[1280px] mx-auto px-12">
+      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
         <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Support
         </p>
@@ -28,7 +27,7 @@ const FAQSection = () => {
           {/* Left — heading + accordion */}
           <div>
             <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[480px] mb-[14px]">
-              Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">answered</em> plainly
+              Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">answered</em> plainly
             </h2>
             <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal mb-[52px] max-w-[400px]">
               No fluff, no vague promises — just straight answers to what teams ask us most before they commit.
@@ -73,7 +72,7 @@ const FAQSection = () => {
               style={{ boxShadow: "0 2px 20px var(--shadow), inset 0 1px 0 var(--glow)" }}
             >
               <h3 className="text-[1.5rem] font-normal tracking-[-0.025em] leading-[1.2] mb-4 text-col-primary">
-                Still have<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">questions?</em>
+                Still have<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">questions?</em>
               </h3>
               <p className="text-[0.84rem] text-col-tertiary leading-[1.7] font-normal mb-7">
                 Our team responds within 4 hours on weekdays. A 30-minute scoping call is always free — no obligation, no hard sell.

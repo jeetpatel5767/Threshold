@@ -1,5 +1,5 @@
 const Footer = () => (
-  <footer className="bg-col-footer border-t border-col-line/70">
+  <footer className="section-transparent border-t border-col-line/70">
     <div className="max-w-[1280px] mx-auto px-12">
       {/* Main grid */}
       <div className="grid gap-12 py-16 border-b border-col-line/70" style={{ gridTemplateColumns: "1.6fr 1fr 1fr 1fr" }}>

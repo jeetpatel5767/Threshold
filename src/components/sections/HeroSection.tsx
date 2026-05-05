@@ -145,9 +145,8 @@ const HeroSection = () => {
         {/* Canvas (scroll-driven frame sequence) */}
         <canvas
           ref={canvasRef}
-          className={`absolute inset-0 z-[1] ${
-            hasScrolled && isLoaded ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 z-[1] ${hasScrolled && isLoaded ? "opacity-100" : "opacity-0"
+            }`}
         />
 
         <div className="hero-grain absolute inset-0 z-[3]" />
@@ -162,7 +161,7 @@ const HeroSection = () => {
           className="relative z-10 flex flex-col items-center text-center px-6"
         >
           <h1 className="text-3xl md:text-4xl lg:text-5xl text-[#303030] font-regular tracking-[-0.02em] leading-tight">
-            Step <span style={{ fontFamily: "Pacifico"}}>into</span> better
+            Step <span style={{ fontFamily: "Pacifico" }}>into</span> better
             <br />
             digital experiences
           </h1>

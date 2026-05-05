@@ -4,13 +4,13 @@ const Navbar = () => (
       <a href="#" className="flex items-center gap-2 no-underline">
         <div className="w-5 h-5 rounded-full bg-col-primary flex-shrink-0 shadow-[0_1px_4px_var(--shadow-lg)]" />
         <div className="text-[1.1rem] leading-none">
-          <span className="font-semibold text-col-primary tracking-[-0.02em]">Thres</span>
+          <span className="font-extrabold text-col-primary tracking-[-0.02em]">Thres</span>
           <span className="font-pacifico text-col-tertiary">hold</span>
         </div>
       </a>
 
       <div className="flex items-center gap-7 border border-col-line/70 bg-col-surface/55 backdrop-blur-[24px] rounded-full px-6 py-2 shadow-[0_2px_16px_var(--shadow),inset_0_1px_0_var(--glow)]">
-        {["services","work","process","pricing","faq"].map((href) => (
+        {["services", "work", "process", "pricing", "faq"].map((href) => (
           <a
             key={href}
             href={`#${href}`}

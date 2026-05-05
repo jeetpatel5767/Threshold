@@ -42,16 +42,14 @@ const BenefitsSection = () => {
   const cardShadowHover = "0 8px 36px var(--shadow-lg), inset 0 1px 0 var(--glow)";
 
   return (
-    <section className="py-[120px] pb-[140px] relative overflow-hidden benefits-grid-bg" ref={ref}
-      style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(215 10% 88%) 0%, hsl(210 8% 91%) 100%)" }}
-    >
+    <section className="py-[120px] pb-[140px] section-transparent relative" ref={ref}>
       <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
         <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Why Threshold
         </p>
         <div className="grid gap-12 items-end mb-[72px]" style={{ gridTemplateColumns: "1fr 1fr" }}>
           <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary">
-            Built different,<br />delivered <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-tertiary">right</em>
+            Built different,<br />delivered <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">right</em>
           </h2>
           <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[380px]">
             Six principles that govern everything we ship — not aspirations, but non-negotiables baked into every project from day one.
@@ -73,7 +71,7 @@ const BenefitsSection = () => {
               <p className="text-[0.82rem] text-col-tertiary leading-[1.7] font-normal">Design isn't decoration — it's strategy. Every interface decision maps back to user goals and business outcomes. We lead with design thinking before a single line of code.</p>
             </div>
             <div>
-              <div className="text-[clamp(2.8rem,5vw,4.5rem)] font-light tracking-[-0.04em] leading-none mb-2 text-col-primary">97<em className="font-pacifico not-italic text-[0.55em] text-col-warm align-super">%</em></div>
+              <div className="text-[clamp(2.8rem,5vw,4.5rem)] font-light tracking-[-0.04em] leading-none mb-2 text-col-primary">97<em className="font-pacifico not-italic text-[0.55em] text-col-title align-super">%</em></div>
               <p className="text-[0.78rem] text-col-tertiary leading-[1.5] max-w-[200px]">of our clients rate design quality as the primary reason they chose us</p>
             </div>
           </div>
@@ -92,8 +90,8 @@ const BenefitsSection = () => {
               <p className="text-[0.82rem] text-col-tertiary leading-[1.7] font-normal">Security isn't a phase — it's a posture. Threat modelling, OWASP compliance, penetration testing, and zero-trust architecture are standard across every engagement.</p>
             </div>
             <div className="flex gap-5 pt-5 border-t border-col-line/70 mt-6">
-              <div><div className="text-[1.3rem] font-normal tracking-[-0.02em] text-col-primary">0<em className="font-pacifico not-italic text-[0.75em] text-col-warm">✓</em></div><div className="text-[0.62rem] text-col-dim tracking-[0.05em] mt-[2px]">critical breaches post-launch</div></div>
-              <div><div className="text-[1.3rem] font-normal tracking-[-0.02em] text-col-primary">100<em className="font-pacifico not-italic text-[0.75em] text-col-warm">%</em></div><div className="text-[0.62rem] text-col-dim tracking-[0.05em] mt-[2px]">audits passed first attempt</div></div>
+              <div><div className="text-[1.3rem] font-normal tracking-[-0.02em] text-col-primary">0<em className="font-pacifico not-italic text-[0.75em] text-col-title">✓</em></div><div className="text-[0.62rem] text-col-dim tracking-[0.05em] mt-[2px]">critical breaches post-launch</div></div>
+              <div><div className="text-[1.3rem] font-normal tracking-[-0.02em] text-col-primary">100<em className="font-pacifico not-italic text-[0.75em] text-col-title">%</em></div><div className="text-[0.62rem] text-col-dim tracking-[0.05em] mt-[2px]">audits passed first attempt</div></div>
             </div>
           </div>
 

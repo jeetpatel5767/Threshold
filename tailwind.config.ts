@@ -63,22 +63,23 @@ const config: Config = {
         // Custom palette — prefix "col", semantic names
         col: {
           // Backgrounds
-          bg:       "hsl(210 8% 91%)",   // page background
-          "bg-2":   "hsl(210 6% 84%)",   // mid background
-          "bg-3":   "hsl(215 7% 87%)",   // alt background
+          bg: "hsl(210 8% 91%)",   // page background
+          "bg-2": "hsl(210 6% 84%)",   // mid background
+          "bg-3": "hsl(215 7% 87%)",   // alt background
           // Text hierarchy: primary (darkest) → dim (lightest)
-          primary:   "hsl(220 12% 18%)", // main text / headings
+          primary: "hsl(220 12% 18%)", // main text / headings
           secondary: "hsl(220 8% 32%)",  // secondary text
-          tertiary:  "hsl(215 8% 52%)",  // muted / supporting text
-          dim:       "hsl(210 6% 68%)",  // captions / labels
-          warm:      "hsl(30 8% 55%)",   // warm accent
+          tertiary: "hsl(215 8% 52%)",  // muted / supporting text
+          dim: "hsl(210 6% 68%)",  // captions / labels
+          warm: "hsl(30 8% 55%)",   // warm accent
           // Surfaces (cards / panels)
-          surface:   "hsl(210 10% 96%)",
+          surface: "hsl(210 10% 96%)",
           "surface-2": "hsl(210 8% 93%)",
-          footer:    "hsl(215 8% 86%)",
+          footer: "hsl(215 8% 86%)",
           // Dividers / borders
-          line:      "hsl(210 8% 80%)",
+          line: "hsl(210 8% 80%)",
           "line-soft": "hsl(210 8% 86%)",
+          title: "hsl(25 50% 38%)",
         },
 
         sidebar: {
