@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useReveal } from "@/hooks/useReveal";
 
 const testimonials = [
   { initials: "JM", name: "James Mercer",   role: "CTO, Luminary Finance",           tag: "Frontend + AI",  quote: <>Working with Threshold was unlike any agency experience I've had. They delivered a product that felt <em className="italic text-col-primary">genuinely considered</em> — every interaction, every edge case, every pixel. Our users noticed immediately.</> },
@@ -9,14 +10,26 @@ const testimonials = [
   { initials: "NB", name: "Nina Berg",     role: "Operations Director, Nexus Logistics", tag: "Full Stack", quote: <>Daily updates, real staging previews, no surprises. The transparency alone was worth it — but then they also delivered <em className="italic text-col-primary">a product our whole team is proud to show.</em></> },
 ];
 
-const CARDS_VIS = 3;
 const T_TOTAL = testimonials.length;
 const cardShadow = "0 2px 16px var(--shadow), inset 0 1px 0 var(--glow)";
 
 const TestimonialsSection = () => {
   const [current, setCurrent] = useState(0);
+  const [cardsVis, setCardsVis] = useState(3);
   const trackRef = useRef<HTMLDivElement>(null);
-  const max = T_TOTAL - CARDS_VIS;
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) setCardsVis(1);
+      else if (window.innerWidth < 1024) setCardsVis(2);
+      else setCardsVis(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const max = Math.max(0, T_TOTAL - cardsVis);
 
   const goTo = (idx: number) => setCurrent(Math.min(Math.max(idx, 0), max));
 
@@ -32,18 +45,20 @@ const TestimonialsSection = () => {
     return () => clearInterval(t);
   }, [max]);
 
-  const fillPct = ((current + CARDS_VIS) / T_TOTAL) * 100;
+  const fillPct = ((current + cardsVis) / T_TOTAL) * 100;
   let touchX = 0;
 
+  const sectionRef = useReveal<HTMLElement>();
+
   return (
-    <section className="py-[120px] pb-[140px] section-transparent relative">
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+    <section ref={sectionRef} className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] section-transparent relative">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Client voices
         </p>
 
         <div className="flex items-end justify-between mb-14">
-          <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[500px]">
+          <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[500px]">
             What <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">clients</em><br />say about us
           </h2>
           <div className="flex items-center gap-[10px] flex-shrink-0">
@@ -60,7 +75,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Carousel */}
-        <div className="overflow-hidden relative">
+        <div className="reveal delay-2 overflow-hidden relative">
           <div
             ref={trackRef}
             className="flex gap-5 transition-transform duration-[600ms] [cubic-bezier(0.4,0,0.2,1)] will-change-transform"
@@ -71,7 +86,7 @@ const TestimonialsSection = () => {
               <div
                 key={i}
                 className="t-card-item bg-[hsl(210_8%_96%/0.55)] border border-col-line-soft/50 rounded-[20px] p-9 flex flex-col justify-between min-h-[280px] relative overflow-hidden backdrop-blur-[20px] flex-shrink-0 transition-[box-shadow] duration-[400ms] hover:shadow-[0_6px_32px_var(--shadow-lg),inset_0_1px_0_var(--glow)]"
-                style={{ flex: `0 0 calc((100% - 40px) / 3)`, boxShadow: cardShadow }}
+                style={{ flex: `0 0 calc((100% - ${(cardsVis - 1) * 20}px) / ${cardsVis})`, boxShadow: cardShadow }}
               >
                 <div className="font-pacifico text-[5rem] leading-[0.8] text-[hsl(215_8%_84%)] absolute top-5 right-6 select-none pointer-events-none">"</div>
                 <div>
@@ -107,14 +122,20 @@ const TestimonialsSection = () => {
           </div>
         </div>
 
-        {/* Trust logos */}
-        <div className="flex items-center gap-8 mt-[72px] pt-12 border-t border-col-line/70 flex-wrap">
+        {/* Trusted by — Marquee */}
+        <div className="reveal delay-3 flex items-center gap-8 mt-[72px] pt-12 border-t border-col-line/70">
           <span className="text-[0.62rem] tracking-[0.2em] uppercase text-col-dim whitespace-nowrap flex-shrink-0">Trusted by</span>
           <div className="w-px h-5 bg-col-line/70 flex-shrink-0" />
-          <div className="flex gap-8 items-center flex-wrap">
-            {["Luminary","Vault Pay","Aura Health","Signal","ChainFlow","Nexus"].map((l) => (
-              <span key={l} className="text-[0.75rem] font-normal tracking-[0.1em] uppercase text-col-dim transition-colors duration-300 hover:text-col-tertiary">{l}</span>
-            ))}
+          <div className="overflow-hidden flex-1 [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+            <div className="marquee-track">
+              {[...Array(2)].map((_, rep) => (
+                <div key={rep} className="flex gap-12 items-center px-6">
+                  {["Luminary","Vault Pay","Aura Health","Signal","ChainFlow","Nexus","Luminary","Vault Pay","Aura Health","Signal","ChainFlow","Nexus"].map((l, i) => (
+                    <span key={`${rep}-${i}`} className="text-[0.75rem] font-normal tracking-[0.1em] uppercase text-col-dim whitespace-nowrap transition-colors duration-300 hover:text-col-tertiary">{l}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

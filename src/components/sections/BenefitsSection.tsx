@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useReveal } from "@/hooks/useReveal";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 const BIcon = ({ children }: { children: React.ReactNode }) => (
   <div className="w-10 h-10 rounded-[10px] border border-col-line/70 bg-[hsl(210_8%_97%/0.8)] flex items-center justify-center mb-5 flex-shrink-0 shadow-[0_1px_6px_var(--shadow)] group-hover:[&_svg]:stroke-col-primary">
@@ -41,27 +43,29 @@ const BenefitsSection = () => {
   const cardShadow = "0 2px 16px var(--shadow), inset 0 1px 0 var(--glow)";
   const cardShadowHover = "0 8px 36px var(--shadow-lg), inset 0 1px 0 var(--glow)";
 
+  const sectionRef = useReveal<HTMLElement>();
+
   return (
-    <section className="py-[120px] pb-[140px] section-transparent relative" ref={ref}>
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+    <section className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] section-transparent relative" ref={(el) => { (ref as React.MutableRefObject<HTMLElement | null>).current = el; (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el; }}>
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Why Threshold
         </p>
         <div className="grid gap-12 items-end mb-[72px]" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary">
+          <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary">
             Built different,<br />delivered <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">right</em>
           </h2>
-          <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[380px]">
+          <p className="reveal delay-2 text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[380px]">
             Six principles that govern everything we ship — not aspirations, but non-negotiables baked into every project from day one.
           </p>
         </div>
 
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3,1fr)", gridTemplateRows: "auto auto" }}>
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto]">
           {/* Featured — spans 2 cols */}
           <div
             data-benefit="0" data-delay="0"
-            className={`${cardBase} col-span-2 grid gap-8 items-center bg-[hsl(210_8%_92%/0.65)] transition-[opacity,transform,box-shadow] ${visible[0] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-            style={{ gridTemplateColumns: "1fr 1fr", boxShadow: cardShadow }}
+            className={`${cardBase} lg:col-span-2 grid gap-8 items-center bg-[hsl(210_8%_92%/0.65)] transition-[opacity,transform,box-shadow] grid-cols-1 sm:grid-cols-2 ${visible[0] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            style={{ boxShadow: cardShadow }}
             onMouseEnter={(e) => (e.currentTarget.style.boxShadow = cardShadowHover)}
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = cardShadow)}
           >
@@ -71,7 +75,7 @@ const BenefitsSection = () => {
               <p className="text-[0.82rem] text-col-tertiary leading-[1.7] font-normal">Design isn't decoration — it's strategy. Every interface decision maps back to user goals and business outcomes. We lead with design thinking before a single line of code.</p>
             </div>
             <div>
-              <div className="text-[clamp(2.8rem,5vw,4.5rem)] font-light tracking-[-0.04em] leading-none mb-2 text-col-primary">97<em className="font-pacifico not-italic text-[0.55em] text-col-title align-super">%</em></div>
+              <div className="text-[clamp(2.4rem,8vw,4.5rem)] font-light tracking-[-0.04em] leading-none mb-2 text-col-primary"><AnimatedCounter to={97} className="" suffix="%" /></div>
               <p className="text-[0.78rem] text-col-tertiary leading-[1.5] max-w-[200px]">of our clients rate design quality as the primary reason they chose us</p>
             </div>
           </div>
@@ -79,7 +83,7 @@ const BenefitsSection = () => {
           {/* Tall — spans 2 rows */}
           <div
             data-benefit="1" data-delay="80"
-            className={`${cardBase} row-span-2 flex flex-col justify-between transition-[opacity,transform,box-shadow] ${visible[1] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            className={`${cardBase} lg:row-span-2 md:col-span-2 lg:col-span-1 flex flex-col justify-between transition-[opacity,transform,box-shadow] ${visible[1] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
             style={{ boxShadow: cardShadow }}
             onMouseEnter={(e) => (e.currentTarget.style.boxShadow = cardShadowHover)}
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = cardShadow)}

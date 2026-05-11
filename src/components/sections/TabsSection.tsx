@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useReveal } from "@/hooks/useReveal";
 
 const Tag = ({ label }: { label: string }) => (
   <span className="text-[0.6rem] tracking-[0.08em] uppercase px-[10px] py-1 rounded-full border border-col-line/70 bg-col-surface/60 text-col-dim font-normal">{label}</span>
@@ -30,22 +32,23 @@ const tabs = ["All", "UI/UX Design", "Frontend", "AI Systems", "Cybersecurity", 
 const TabsSection = () => {
   const [active, setActive] = useState(0);
   const c = cases[Math.min(active, cases.length - 1)];
+  const sectionRef = useReveal<HTMLElement>();
 
   return (
-    <section className="py-[120px] pb-[140px] section-transparent relative" id="work">
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+    <section ref={sectionRef} className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] section-transparent relative" id="work">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Selected work
         </p>
-        <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[640px] mb-4">
+        <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[640px] mb-4">
           Projects built with<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">intention</em> and precision
         </h2>
-        <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[440px] mb-[52px]">
+        <p className="reveal delay-2 text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[440px] mb-[52px]">
           A curated look at what we've shipped — across design, engineering, AI, and the decentralised web.
         </p>
 
         {/* Tab bar */}
-        <div className="flex flex-wrap gap-2 mb-[52px]">
+        <div className="reveal delay-3 flex flex-wrap gap-2 mb-[52px]">
           {tabs.map((t, i) => (
             <button
               key={t}
@@ -59,10 +62,10 @@ const TabsSection = () => {
         </div>
 
         {/* Case panel */}
-        <div className="grid gap-12 items-center" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
+        <div className="reveal delay-4 grid gap-12 items-center grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Visual */}
           <div
-            className="rounded-[18px] overflow-hidden bg-col-surface/60 border border-col-line-soft/50 relative flex items-center justify-center backdrop-blur-[16px] shadow-[0_4px_32px_var(--shadow)]"
+            className="rounded-[18px] overflow-hidden bg-col-surface/60 border border-col-line-soft/50 relative flex items-center justify-center backdrop-blur-[16px] shadow-[0_4px_32px_var(--shadow)] transition-transform duration-500 hover:scale-[1.01]"
             style={{ aspectRatio: "4/3" }}
           >
             <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 12px, hsl(215 8% 84%) 12px, hsl(215 8% 84%) 13px)" }} />
@@ -81,9 +84,9 @@ const TabsSection = () => {
           {/* Info */}
           <div>
             <p className="text-[0.62rem] tracking-[0.2em] uppercase text-col-warm font-medium mb-4">{c.cat}</p>
-            <h3 className="text-[clamp(1.7rem,2.8vw,2.4rem)] font-normal tracking-[-0.03em] leading-[1.1] mb-5 text-col-primary">{c.title}</h3>
+            <h3 className="text-[clamp(1.5rem,6vw,2.4rem)] font-normal tracking-[-0.03em] leading-[1.1] mb-5 text-col-primary">{c.title}</h3>
             <p className="text-[0.88rem] text-col-tertiary leading-[1.75] mb-7 font-normal">{c.desc}</p>
-            <div className="flex gap-8 mb-8 py-5 border-t border-b border-col-line/70">
+            <div className="flex flex-wrap gap-6 md:gap-8 mb-8 py-5 border-t border-b border-col-line/70">
               {c.metrics.map((m, i) => (
                 <div key={i}>
                   <div className="text-[1.5rem] font-medium tracking-[-0.02em] text-col-primary leading-none">{m.val}</div>
@@ -92,14 +95,14 @@ const TabsSection = () => {
               ))}
             </div>
             <div className="flex flex-wrap gap-[6px] mb-8">{c.tags.map(t => <Tag key={t} label={t} />)}</div>
-            <a href="#" className="inline-flex items-center gap-[10px] text-[0.75rem] font-medium tracking-[0.1em] uppercase text-col-secondary no-underline border-b border-col-line/70 pb-1 transition-all duration-300 hover:text-col-primary hover:gap-[14px]">
+            <Link to="/case-study" className="inline-flex items-center gap-[10px] text-[0.75rem] font-medium tracking-[0.1em] uppercase text-col-secondary no-underline border-b border-col-line/70 pb-1 transition-all duration-300 hover:text-col-primary hover:gap-[14px]">
               View case study <ArrowIcon />
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* Mini grid */}
-        <div className="grid gap-3 mt-12 pt-8 border-t border-col-line/70" style={{ gridTemplateColumns: "repeat(5,1fr)" }}>
+        <div className="reveal delay-5 grid gap-3 mt-12 pt-8 border-t border-col-line/70 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {cases.map((cc, i) => (
             <div
               key={i}

@@ -160,13 +160,13 @@ const HeroSection = () => {
           }}
           className="relative z-10 flex flex-col items-center text-center px-6"
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-[#303030] font-regular tracking-[-0.02em] leading-tight">
+          <h1 className="text-[clamp(2.5rem,10vw,5rem)] text-[#303030] font-regular tracking-[-0.02em] leading-tight">
             Step <span style={{ fontFamily: "Pacifico" }}>into</span> better
             <br />
             digital experiences
           </h1>
 
-          <p className="mt-4 max-w-[400px] text-base md:text-lg text-[#424141] leading-[0.7] md:leading-[120%]">
+          <p className="mt-4 max-w-[400px] text-base md:text-lg text-[#424141] leading-[1.4] md:leading-[1.2]">
             An AI companion that whispers clarity, conjures ideas, and guides your every move.
           </p>
         </motion.div>

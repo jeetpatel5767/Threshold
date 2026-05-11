@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { useReveal } from "@/hooks/useReveal";
 
 const stepNames = ["Discover", "Design", "Build", "Deploy"];
 const stepPcts = ["25%", "50%", "75%", "100%"];
 
 const steps = [
-  { title: <>Dis<em className="font-pacifico not-italic text-[0.95em] text-col-tertiary">cover</em></>, desc: "We immerse ourselves in your business — goals, users, constraints, and competitive landscape. Stakeholder interviews, technical audits, and market mapping produce a shared understanding before a single pixel is drawn.", chips: ["Discovery Workshop", "User Research", "Tech Audit", "Project Brief"], duration: "1–2 weeks", icon: <><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></> },
-  { title: <>De<em className="font-pacifico not-italic text-[0.95em] text-col-tertiary">sign</em></>, desc: "Information architecture, wireframes, design system, high-fidelity UI — all reviewed with you at every stage. We iterate until the design earns approval, then produce pixel-perfect specs for engineering.", chips: ["Wireframes", "Design System", "Hi-Fi Prototype", "Dev Handoff"], duration: "2–4 weeks", icon: <><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13L8 3 5 6l2 2" /><line x1="2" y1="22" x2="7" y2="17" /></> },
-  { title: <>Bu<em className="font-pacifico not-italic text-[0.95em] text-col-tertiary">ild</em></>, desc: "Engineering in two-week sprints with daily updates and staging previews. Code reviews, automated testing, and performance benchmarks run continuously — so quality is built in, not bolted on at the end.", chips: ["Sprint Cycles", "Staging Previews", "QA & Testing", "Performance Audit"], duration: "4–10 weeks", icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></> },
-  { title: <>De<em className="font-pacifico not-italic text-[0.95em] text-col-tertiary">ploy</em></>, desc: "Zero-downtime release with rollback plans, monitoring dashboards, and a 30-day hypercare period. We don't disappear at launch — we stay to ensure everything runs exactly as designed.", chips: ["CI/CD Pipeline", "Monitoring Setup", "30-day Hypercare", "Documentation"], duration: "1–2 weeks", icon: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /> },
+  { title: <>Discover</>, desc: "We immerse ourselves in your business — goals, users, constraints, and competitive landscape. Stakeholder interviews, technical audits, and market mapping produce a shared understanding before a single pixel is drawn.", chips: ["Discovery Workshop", "User Research", "Tech Audit", "Project Brief"], duration: "1–2 weeks", icon: <><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></> },
+  { title: <>Design</>, desc: "Information architecture, wireframes, design system, high-fidelity UI — all reviewed with you at every stage. We iterate until the design earns approval, then produce pixel-perfect specs for engineering.", chips: ["Wireframes", "Design System", "Hi-Fi Prototype", "Dev Handoff"], duration: "2–4 weeks", icon: <><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13L8 3 5 6l2 2" /><line x1="2" y1="22" x2="7" y2="17" /></> },
+  { title: <>Build</>, desc: "Engineering in two-week sprints with daily updates and staging previews. Code reviews, automated testing, and performance benchmarks run continuously — so quality is built in, not bolted on at the end.", chips: ["Sprint Cycles", "Staging Previews", "QA & Testing", "Performance Audit"], duration: "4–10 weeks", icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></> },
+  { title: <>Deploy</>, desc: "Zero-downtime release with rollback plans, monitoring dashboards, and a 30-day hypercare period. We don't disappear at launch — we stay to ensure everything runs exactly as designed.", chips: ["CI/CD Pipeline", "Monitoring Setup", "30-day Hypercare", "Documentation"], duration: "1–2 weeks", icon: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /> },
 ];
 
 const StepsSection = () => {
@@ -39,26 +40,28 @@ const StepsSection = () => {
     return () => { scrollObs.disconnect(); entranceObs.disconnect(); };
   }, []);
 
+  const sectionRevealRef = useReveal<HTMLElement>();
+
   return (
     <section
-      className="py-[120px] pb-[140px] section-transparent relative"
+      className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] section-transparent relative"
       id="process"
-      ref={ref}
+      ref={(el) => { (ref as React.MutableRefObject<HTMLDivElement | null>).current = el as unknown as HTMLDivElement; (sectionRevealRef as React.MutableRefObject<HTMLElement | null>).current = el; }}
     >
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />How we work
         </p>
-        <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[580px] mb-4">
+        <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[580px] mb-4">
           From brief to launch —<br />four <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">precise</em> phases
         </h2>
-        <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[420px] mb-20">
+        <p className="reveal delay-2 text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[420px] mb-20">
           A rigorous, transparent process refined across dozens of projects. No surprises — just clear milestones and consistent delivery.
         </p>
 
-        <div className="grid gap-20 items-start" style={{ gridTemplateColumns: "1fr 1fr" }}>
+        <div className="grid gap-12 lg:gap-20 items-start grid-cols-1 lg:grid-cols-2">
           {/* Sticky visual */}
-          <div className="sticky top-20">
+          <div className="relative lg:sticky top-20 order-1 lg:order-none mb-10 lg:mb-0">
             <div
               className="bg-[hsl(210_8%_93%/0.6)] border border-col-line-soft/50 rounded-[24px] overflow-hidden relative flex flex-col backdrop-blur-[24px] shadow-[0_4px_40px_var(--shadow),inset_0_1px_0_var(--glow)]"
               style={{ aspectRatio: "4/5" }}
@@ -101,7 +104,7 @@ const StepsSection = () => {
                 key={i}
                 data-step={i}
                 onClick={() => setActive(i)}
-                className={`py-10 border-b border-col-line/70 grid gap-6 cursor-default transition-all duration-[600ms] first:pt-0 last:border-none ${visible[i] ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}`}
+                className={`py-8 md:py-10 border-b border-col-line/70 grid gap-4 md:gap-6 cursor-default transition-all duration-[600ms] first:pt-0 last:border-none ${visible[i] ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}`}
                 style={{ gridTemplateColumns: "48px 1fr" }}
               >
                 {/* Left col */}

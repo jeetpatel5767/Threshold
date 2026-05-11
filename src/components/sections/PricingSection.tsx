@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useReveal } from "@/hooks/useReveal";
 
 type Bill = "project" | "retainer";
 
@@ -28,24 +29,27 @@ const PricingSection = () => {
   const starter = bill === "project" ? <>8<em className="font-pacifico not-italic text-[0.45em] font-normal opacity-50">k</em></> : <>2<em className="font-pacifico not-italic text-[0.45em] font-normal opacity-50">k</em></>;
   const growth  = bill === "project" ? <>24<em className="font-pacifico not-italic text-[0.45em] font-normal opacity-50">k</em></> : <>6<em className="font-pacifico not-italic text-[0.45em] font-normal opacity-50">k</em></>;
 
+  const sectionRef = useReveal<HTMLElement>();
+
   return (
     <section
-      className="py-[120px] pb-[140px] relative section-transparent"
+      ref={sectionRef}
+      className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] relative section-transparent"
       id="pricing"
     >
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Investment
         </p>
-        <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[600px] mb-[14px]">
+        <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[600px] mb-[14px]">
           pricing that reflects<br />the <em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">value</em> we deliver
         </h2>
-        <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[440px] mb-[52px]">
+        <p className="reveal delay-2 text-[0.88rem] text-col-tertiary leading-[1.7] font-normal max-w-[440px] mb-[52px]">
           Three engagement models designed around how teams actually work — from focused projects to long-term partnerships.
         </p>
 
         {/* Billing toggle */}
-        <div className="flex items-center gap-4 mb-[52px]">
+        <div className="reveal delay-3 flex items-center gap-4 mb-[52px]">
           {(["project","retainer"] as Bill[]).map((b) => (
             <button
               key={b}
@@ -58,7 +62,7 @@ const PricingSection = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-3 gap-4 items-start">
+        <div className="reveal delay-4 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-4 items-start">
           {/* Starter */}
           <div
             className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-8 py-9 flex flex-col relative overflow-hidden backdrop-blur-[20px] transition-all duration-[400ms] hover:-translate-y-1"
@@ -69,7 +73,7 @@ const PricingSection = () => {
             <span className="inline-block text-[0.62rem] font-normal tracking-[0.12em] uppercase px-[10px] py-1 rounded-full bg-[hsl(210_8%_90%/0.7)] text-col-tertiary mb-5 border border-col-line/70 self-start">Starter</span>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-[1.1rem] font-normal opacity-50 self-start mt-2">$</span>
-              <span className="text-[clamp(2.8rem,4vw,3.6rem)] font-light tracking-[-0.04em] leading-none text-col-primary">{starter}</span>
+              <span className="text-[clamp(2.4rem,8vw,3.6rem)] font-light tracking-[-0.04em] leading-none text-col-primary">{starter}</span>
             </div>
             <p className="text-[0.78rem] text-col-tertiary mb-4">{period}</p>
             <p className="text-[0.82rem] text-col-tertiary leading-[1.6] font-normal mb-6">Ideal for startups and MVPs — a focused engagement to design and ship one core product or feature.</p>
@@ -84,16 +88,16 @@ const PricingSection = () => {
 
           {/* Growth — featured */}
           <div
-            className="rounded-[22px] border border-[hsl(220_8%_30%)] bg-col-primary px-8 py-9 flex flex-col relative overflow-hidden -translate-y-3 transition-all duration-[400ms] hover:-translate-y-4"
+            className="rounded-[22px] border border-[hsl(220_8%_30%)] bg-col-primary px-8 py-9 flex flex-col relative overflow-hidden lg:-translate-y-3 transition-all duration-[400ms] hover:-translate-y-1 lg:hover:-translate-y-4"
             style={{ boxShadow: "0 8px 48px var(--shadow-lg)" }}
             onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 16px 56px hsl(220 12% 50% / 0.22)")}
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 8px 48px var(--shadow-lg)")}
           >
-            <div className="absolute top-5 right-5 text-[0.58rem] font-medium tracking-[0.12em] uppercase px-[10px] py-1 rounded-full bg-[hsl(215_8%_82%)] text-col-secondary">Most popular</div>
+            <div className="absolute top-5 right-5 text-[0.58rem] font-medium tracking-[0.12em] uppercase px-[10px] py-1 rounded-full shimmer text-col-secondary">Most popular</div>
             <span className="inline-block text-[0.62rem] font-normal tracking-[0.12em] uppercase px-[10px] py-1 rounded-full bg-[hsl(215_8%_88%)] text-col-secondary mb-5 self-start">Growth</span>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-[1.1rem] font-normal opacity-50 self-start mt-2 text-col-bg">$</span>
-              <span className="text-[clamp(2.8rem,4vw,3.6rem)] font-light tracking-[-0.04em] leading-none text-col-bg">{growth}</span>
+              <span className="text-[clamp(2.4rem,8vw,3.6rem)] font-light tracking-[-0.04em] leading-none text-col-bg">{growth}</span>
             </div>
             <p className="text-[0.78rem] mb-4" style={{ color: "hsl(215 8% 52%)" }}>{period}</p>
             <p className="text-[0.82rem] leading-[1.6] font-normal mb-6" style={{ color: "hsl(215 8% 52%)" }}>For teams ready to build something complete — full-stack product with design, engineering, and AI capabilities.</p>
@@ -130,7 +134,7 @@ const PricingSection = () => {
         </div>
 
         {/* Enterprise note */}
-        <div className="mt-10 px-7 py-6 rounded-[14px] border border-col-line-soft/50 bg-[hsl(210_8%_94%/0.6)] flex items-center justify-between gap-6 backdrop-blur-[16px] shadow-[0_2px_16px_var(--shadow)]">
+        <div className="reveal mt-10 px-7 py-6 rounded-[14px] border border-col-line-soft/50 bg-[hsl(210_8%_94%/0.6)] flex items-center justify-between gap-6 backdrop-blur-[16px] shadow-[0_2px_16px_var(--shadow)]">
           <p className="text-[0.84rem] text-col-tertiary leading-[1.5]">
             <strong className="text-col-primary font-medium">Not sure which fits?</strong> Every engagement starts with a free 30-minute scoping call — we'll tell you exactly what you need, even if it's not us.
           </p>

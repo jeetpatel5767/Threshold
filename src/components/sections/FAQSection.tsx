@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useReveal } from "@/hooks/useReveal";
 
 const faqs: { q: string; a: React.ReactNode }[] = [
   { q: "How long does a typical project take?", a: <>Starter projects run 4–6 weeks. Growth engagements run 8–12 weeks. Enterprise scopes vary — we'll give you a precise timeline after the discovery phase. We've never missed a deadline we committed to.</> },
@@ -13,27 +14,30 @@ const faqs: { q: string; a: React.ReactNode }[] = [
 const FAQSection = () => {
   const [open, setOpen] = useState(0);
 
+  const sectionRef = useReveal<HTMLElement>();
+
   return (
     <section
-      className="py-[120px] pb-[140px] relative section-transparent"
+      ref={sectionRef}
+      className="py-[70px] pb-[90px] md:py-[120px] md:pb-[140px] relative section-transparent"
       id="faq"
     >
-      <div className="max-w-[1280px] mx-auto px-12 relative z-[1]">
-        <p className="flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-[1]">
+        <p className="reveal flex items-center gap-[10px] text-[0.68rem] tracking-[0.22em] uppercase text-col-dim mb-5">
           <span className="inline-block w-5 h-px bg-col-warm flex-shrink-0" />Support
         </p>
 
-        <div className="grid gap-16 items-start" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
+        <div className="grid gap-12 lg:gap-16 items-start grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Left — heading + accordion */}
           <div>
-            <h2 className="text-[clamp(2rem,4vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[480px] mb-[14px]">
+            <h2 className="reveal delay-1 text-[clamp(1.8rem,7vw,3.6rem)] font-normal tracking-[-0.03em] leading-[1.1] text-col-primary max-w-[480px] mb-[14px]">
               Every question,<br /><em className="font-pacifico not-italic font-normal text-[0.9em] text-col-title">answered</em> plainly
             </h2>
-            <p className="text-[0.88rem] text-col-tertiary leading-[1.7] font-normal mb-[52px] max-w-[400px]">
+            <p className="reveal delay-2 text-[0.88rem] text-col-tertiary leading-[1.7] font-normal mb-[52px] max-w-[400px]">
               No fluff, no vague promises — just straight answers to what teams ask us most before they commit.
             </p>
 
-            <div className="flex flex-col">
+            <div className="reveal delay-3 flex flex-col">
               {faqs.map((f, i) => (
                 <div
                   key={i}
@@ -65,7 +69,7 @@ const FAQSection = () => {
           </div>
 
           {/* Right — contact card + stats */}
-          <div className="flex flex-col gap-4 sticky top-20">
+          <div className="reveal-right delay-2 flex flex-col gap-4 relative lg:sticky top-20">
             {/* Contact card */}
             <div
               className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-8 py-9 flex flex-col backdrop-blur-[20px]"
@@ -99,7 +103,7 @@ const FAQSection = () => {
 
             {/* Mini stats card */}
             <div
-              className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-7 py-6 flex justify-between backdrop-blur-[20px]"
+              className="rounded-[22px] border border-col-line-soft/50 bg-[hsl(210_8%_96%/0.55)] px-7 py-6 flex flex-wrap gap-6 md:gap-4 md:flex-nowrap justify-between backdrop-blur-[20px]"
               style={{ boxShadow: "0 2px 20px var(--shadow), inset 0 1px 0 var(--glow)" }}
             >
               {[

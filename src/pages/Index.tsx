@@ -11,6 +11,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PricingSection from "@/components/sections/PricingSection";
 import FAQSection from "@/components/sections/FAQSection";
 import CTASection from "@/components/sections/CTASection";
+import TaglineMarqueeSection from "@/components/sections/TaglineMarqueeSection";
 
 const Index = () => {
   useEffect(() => {
@@ -28,9 +29,10 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <HorizontalBrandSection />
+      <TaglineMarqueeSection />
       <div className="relative z-10">
-        <FeaturesSection />
         <TabsSection />
+        <FeaturesSection />
         <StepsSection />
         <BenefitsSection />
         <TestimonialsSection />
