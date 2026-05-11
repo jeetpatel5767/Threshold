@@ -160,7 +160,7 @@ const HeroSection = () => {
           }}
           className="relative z-10 flex flex-col items-center text-center px-6"
         >
-          <h1 className="text-[clamp(2.5rem,10vw,5rem)] text-[#303030] font-regular tracking-[-0.02em] leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-[#303030] font-regular tracking-[-0.02em] leading-tight">
             Step <span style={{ fontFamily: "Pacifico" }}>into</span> better
             <br />
             digital experiences
